@@ -1,0 +1,15 @@
+{
+    "appId": "com.argenisdominguez.comp-stats",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "./public/utilities.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}
