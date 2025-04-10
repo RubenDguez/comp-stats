@@ -25,3 +25,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: ./.github/actions/dummy-js
+
+    alexand-job:
+        needs: run-dummy-js-code
+        runs-on: ubuntu-latest
+
+        steps:
+            - run: echo "hello alexander"

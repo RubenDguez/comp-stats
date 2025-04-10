@@ -14,8 +14,12 @@ export default class ResourceManager {
       return Promise.reject("Command is undefined");
     }
     return new Promise((resolve) => {
-      exec(command + '|| true', (error, stdout) => {
-        resolve(stdout.trim());
+      exec(command, (error, stdout) => {
+        const str =
+          error?.message === undefined
+            ? stdout.trim()
+            : stdout.trim() + "\n\n" + error?.message.trim();
+        resolve(str);
       });
     });
   }

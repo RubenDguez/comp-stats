@@ -1,3 +1,4 @@
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -7,8 +8,8 @@ import {
   FormControl,
   Grid,
   InputLabel,
+  LinearProgress,
   MenuItem,
-  Paper,
   Select,
   Tab,
   TextField,
@@ -19,9 +20,13 @@ const Main = () => {
   const { getters, setters, refs, actions } = useMain();
 
   return (
-    <Paper elevation={2} sx={{ padding: "1rem" }}>
-      <form ref={refs.formRef} onSubmit={(e) => actions.handleFormAction(e)}>
-        <Grid container spacing={2}>
+    <Box>
+      <form
+        ref={refs.formRef}
+        onSubmit={(e) => actions.handleFormAction(e)}
+        style={{ marginBottom: "2rem" }}
+      >
+        <Grid container spacing={3}>
           <Grid size={12}>
             <TextField
               fullWidth
@@ -95,26 +100,18 @@ const Main = () => {
               />
             </Grid>
           </Grid>
+          <Grid size={12}>
+            <Button
+              loading={getters.isLoading}
+              loadingPosition="start"
+              type="submit"
+              variant="outlined"
+              startIcon={<PlayArrowIcon color="success" />}
+            >
+              Run
+            </Button>
+          </Grid>
         </Grid>
-        <Box sx={{ marginY: "1rem" }}>
-          <TextField
-            disabled
-            fullWidth
-            size="small"
-            label="Command to execute"
-            type="text"
-            multiline
-            rows={3}
-            name="command"
-            id="command"
-            value={getters.command}
-          />
-        </Box>
-        <Box>
-          <Button fullWidth type="submit" variant="outlined">
-            Run
-          </Button>
-        </Box>
       </form>
 
       <TabContext value={getters.value}>
@@ -123,36 +120,52 @@ const Main = () => {
             onChange={actions.handleTabChange}
             aria-label="lab API tabs example"
           >
-            <Tab label="Output" value="1" />
+            <Tab label="Log" value="1" />
             <Tab label="File" value="2" />
+            <Tab label="Command" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1" sx={{ paddingX: 0, paddingBottom: 0 }}>
+          {getters.isLoading && (
+            <Box sx={{ marginBottom: "2px" }}>
+              <LinearProgress />
+            </Box>
+          )}
           <TextField
             color="success"
             fullWidth
             multiline
-            rows={20}
-            value={getters.response}
+            rows={25}
+            value={getters.isLoading ? '' : getters.response}
             inputProps={{
-              style: { fontFamily: "monospace", fontSize: 12, color: 'gold' },
+              style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
             }}
           />
         </TabPanel>
         <TabPanel value="2" sx={{ paddingX: 0, paddingBottom: 0 }}>
           <TextField
-            color="success"
             fullWidth
             multiline
-            rows={20}
+            rows={25}
             value={getters.fileContent}
             inputProps={{
-              style: { fontFamily: "monospace", fontSize: 12, color: 'gold' },
+              style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
+            }}
+          />
+        </TabPanel>
+        <TabPanel value="3" sx={{ paddingX: 0, paddingBottom: 0 }}>
+          <TextField
+            fullWidth
+            multiline
+            rows={25}
+            value={getters.command}
+            inputProps={{
+              style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
             }}
           />
         </TabPanel>
       </TabContext>
-    </Paper>
+    </Box>
   );
 };
 
