@@ -1,12 +1,26 @@
 import {app, BrowserWindow} from 'electron';
-import path from 'path';
 import Utils from './Utils.js';
+import ResourceManager from './ResourceManager.js';
 
 app.on('ready', () => {
+    const mainWindow = new BrowserWindow({
+        webPreferences: {
+            preload: Utils.PRELOAD_PATH,
+        }
+    })
+
     if (Utils.IS_DEV) {
-        new BrowserWindow().loadURL('http://localhost:5123');
-        return;
+        mainWindow.loadURL('http://localhost:5123');
+    } else {
+        mainWindow.loadFile(Utils.UI_PATH);
     }
 
-    new BrowserWindow().loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
+    ResourceManager.pollResources(mainWindow);
+
+    Utils.ipcHandle('getStaticData', () => {
+        return ResourceManager.staticData();
+    })
+    Utils.ipcHandle('exec', (args: string | undefined) => {
+        return ResourceManager.exec(args)
+    })
 });

@@ -1,0 +1,27 @@
+name: TEST
+
+on: [push, create, pull_request]
+
+jobs:
+    say-hello:
+        runs-on: axd0v35
+
+        steps:
+            - run: echo "Hello Lisa Freiwald"
+            - run: echo "Hello everyone"
+
+    say-hola:
+        needs: say-hello
+        runs-on: ubuntu-latest
+
+        steps:
+            - run: echo "Hola mundo"
+            - run: echo "Hola Ruben Dominguez"
+
+    run-dummy-js-code:
+        needs: say-hola 
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/dummy-js

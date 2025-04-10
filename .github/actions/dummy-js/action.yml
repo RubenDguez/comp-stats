@@ -1,0 +1,6 @@
+name: TEST2
+description: Test 2
+
+runs:
+  using: node20
+  main: ./index.js

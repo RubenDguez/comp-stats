@@ -1,6 +1,7 @@
 {
     "appId": "com.argenisdominguez.comp-stats",
     "files": ["dist-electron", "dist-react"],
+    "extraResources": ["dist-electron/preload.cjs"],
     "icon": "./public/utilities.png",
     "mac": {
         "target": "dmg"
