@@ -1,6 +1,7 @@
 name: TEST
 
-on: [push, create, pull_request]
+on: 
+    - workflow_dispatch
 
 jobs:
     say-hello:

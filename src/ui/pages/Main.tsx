@@ -53,6 +53,7 @@ const Main = () => {
                 <MenuItem value="push">Push</MenuItem>
                 <MenuItem value="create">Create</MenuItem>
                 <MenuItem value="pull_request">Pull Request</MenuItem>
+                <MenuItem value="workflow_dispatch">Workflow Dispatch</MenuItem>
               </Select>
             </FormControl>
           </Grid>
