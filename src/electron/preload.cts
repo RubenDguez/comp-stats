@@ -18,7 +18,8 @@ electron.contextBridge.exposeInMainWorld('electron', {
         })
     },
     getStaticData: () => ipcInvoke('getStaticData'),
-    exec: (command: string) => ipcInvoke('exec', command)
+    exec: (command: string) => ipcInvoke('exec', command),
+    ymlToJson: (path: string) => ipcInvoke('ymlToJson', path),
 } satisfies Window['electron']);
 
 

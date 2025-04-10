@@ -1,7 +1,14 @@
 name: TEST
 
 on: 
-    - workflow_dispatch
+    push:
+    pull_request: 
+    workflow_dispatch:
+        inputs:
+            input_one:
+                type: string
+            input_two:
+                type: string
 
 jobs:
     say-hello:

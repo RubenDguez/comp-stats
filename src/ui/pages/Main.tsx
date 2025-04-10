@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   LinearProgress,
@@ -37,11 +38,16 @@ const Main = () => {
               id="filename"
               value={getters.filePath}
               onChange={(e) => setters.setFilePath(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid size={4}>
             <FormControl fullWidth>
-              <InputLabel id="on">Execute On</InputLabel>
+              <InputLabel id="on" shrink>
+                Execute On
+              </InputLabel>
               <Select
                 label="Execute On"
                 size="small"
@@ -50,16 +56,20 @@ const Main = () => {
                 value={getters.on}
                 onChange={(e) => setters.setOn(e.target.value)}
               >
-                <MenuItem value="push">Push</MenuItem>
-                <MenuItem value="create">Create</MenuItem>
-                <MenuItem value="pull_request">Pull Request</MenuItem>
-                <MenuItem value="workflow_dispatch">Workflow Dispatch</MenuItem>
+                {getters.onVals.values.map((val) => (
+                  <MenuItem value={val.on}>{val.normalized}</MenuItem>
+                ))}
               </Select>
+              {getters.onVals.selectedValue?.Description !== undefined && (
+                <FormHelperText>
+                  {getters.onVals.selectedValue.Description}
+                </FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid size={4}>
             <FormControl fullWidth>
-              <InputLabel id="containerArchitecture">
+              <InputLabel id="containerArchitecture" shrink>
                 Container Architecture
               </InputLabel>
               <Select
@@ -85,6 +95,9 @@ const Main = () => {
                 id="mapServer"
                 value={getters.mapServer}
                 onChange={(e) => setters.setMapServer(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
             <Grid size={6}>
@@ -98,6 +111,9 @@ const Main = () => {
                 id="mapServerTo"
                 value={getters.mapServerTo}
                 onChange={(e) => setters.setMapServerTo(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
           </Grid>
@@ -137,9 +153,12 @@ const Main = () => {
             fullWidth
             multiline
             rows={25}
-            value={getters.isLoading ? '' : getters.response}
+            value={getters.isLoading ? "" : getters.response}
             inputProps={{
               style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
+            }}
+            InputLabelProps={{
+              shrink: true,
             }}
           />
         </TabPanel>
@@ -152,6 +171,9 @@ const Main = () => {
             inputProps={{
               style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
             }}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </TabPanel>
         <TabPanel value="3" sx={{ paddingX: 0, paddingBottom: 0 }}>
@@ -162,6 +184,9 @@ const Main = () => {
             value={getters.command}
             inputProps={{
               style: { fontFamily: "monospace", fontSize: 12, color: "gold" },
+            }}
+            InputLabelProps={{
+              shrink: true,
             }}
           />
         </TabPanel>

@@ -23,4 +23,7 @@ app.on('ready', () => {
     Utils.ipcHandle('exec', (args: string | undefined) => {
         return ResourceManager.exec(args)
     })
+    Utils.ipcHandle('ymlToJson', (args: string | undefined) => {
+        return ResourceManager.ymlToJson(args)
+    })
 });

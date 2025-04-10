@@ -1,10 +1,11 @@
 import osUtis from "os-utils";
 import os from "os";
-import fs from "fs";
+import fs, { readFileSync } from "fs";
 import { BrowserWindow } from "electron";
 import { COMMON } from "./Enums.js";
 import Utils from "./Utils.js";
 import { exec } from "child_process";
+import yml from 'js-yaml';
 
 export default class ResourceManager {
   private static readonly POLLING_INTERVAL = 500;
@@ -13,6 +14,7 @@ export default class ResourceManager {
     if (!command) {
       return Promise.reject("Command is undefined");
     }
+
     return new Promise((resolve) => {
       exec(command, (error, stdout) => {
         const str =
@@ -22,6 +24,17 @@ export default class ResourceManager {
         resolve(str);
       });
     });
+  }
+
+  public static async ymlToJson(path: string | undefined): Promise<IYaml> {
+    if (!path) {
+      return Promise.reject("Path is undefined");
+    }
+
+    const data = readFileSync(path, 'utf8');
+    const ymlData = yml.load(data);
+
+    return <IYaml>ymlData;
   }
 
   public static pollResources(mainWindow: BrowserWindow) {
