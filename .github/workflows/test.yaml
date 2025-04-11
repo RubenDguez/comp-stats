@@ -15,28 +15,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - run: echo "Hello Lisa Freiwald"
-            - run: echo "Hello everyone"
-
+            - run: echo "HELLO WORLD"
     say-hola:
         needs: say-hello
         runs-on: ubuntu-latest
 
         steps:
-            - run: echo "Hola mundo"
-            - run: echo "Hola Ruben Dominguez"
-
-    run-dummy-js-code:
-        needs: say-hola 
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v4
-            - uses: ./.github/actions/dummy-js
-
-    alexand-job:
-        needs: run-dummy-js-code
-        runs-on: ubuntu-latest
-
-        steps:
-            - run: echo "hello alexander"
+            - run: echo "HOLA WORLD"

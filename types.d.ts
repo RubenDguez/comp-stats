@@ -14,14 +14,18 @@ type EventPayloadMapping = {
     statistics: Statistics;
     getStaticData: StaticData;
     exec: string
-    ymlToJson: IYaml;
+    loadFile: IFileContent;
 }
 
-interface IYaml {
+interface IJson {
     name: string;
     on: Array<string> | Array<object>;
     jobs: Record<string, object>
+}
 
+interface IFileContent {
+    raw: string,
+    json: IJson
 }
 
 interface IGitHubTriggers {
@@ -35,6 +39,6 @@ interface Window {
         exec: (command: string) => Promise<string>;
         subscribeStaticstics: (callback: (statistics: Statistics) => void) => void;
         getStaticData: () => Promise<StaticData>;
-        ymlToJson: (path: string) => Promise<IYaml>;
+        loadFile: (path: string) => Promise<IFileContent>;
     }
 }

@@ -11,16 +11,16 @@ import "@fontsource/roboto/700.css";
 import { CssBaseline } from "@mui/material";
 
 const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
+    palette: {
+        mode: "dark",
+    },
 });
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </StrictMode>
+    <StrictMode>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            <App />
+        </ThemeProvider>
+    </StrictMode>
 );

@@ -1,4 +1,4 @@
-import {app, BrowserWindow} from 'electron';
+import { app, BrowserWindow } from 'electron';
 import Utils from './Utils.js';
 import ResourceManager from './ResourceManager.js';
 
@@ -23,7 +23,7 @@ app.on('ready', () => {
     Utils.ipcHandle('exec', (args: string | undefined) => {
         return ResourceManager.exec(args)
     })
-    Utils.ipcHandle('ymlToJson', (args: string | undefined) => {
-        return ResourceManager.ymlToJson(args)
+    Utils.ipcHandle('loadFile', (args: string | undefined) => {
+        return ResourceManager.loadFile(args)
     })
 });
