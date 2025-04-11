@@ -10,7 +10,7 @@ import GitHub from "../constants/GitHub";
 
 const useMain = () => {
     const TEST_FILE_PATH =
-        "/Users/argenisdominguez/Documents/sandbox/electron/comp-stats/.github/workflows/test.yaml";
+        "";
     const RUNNING_MESSAGE = "Running...";
     const DEFAULT_CONTAINER_ARCH = "linux/amd64";
 
@@ -144,7 +144,9 @@ const useMain = () => {
      * This function loads the file content when the component mounts.
      */
     useEffect(() => {
-        loadFileContent();
+        if (filePath !== "") {
+            loadFileContent();
+        }
     }, [loadFileContent, filePath]);
 
     return {

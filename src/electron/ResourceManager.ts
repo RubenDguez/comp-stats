@@ -1,7 +1,7 @@
 import osUtis from "os-utils";
 import os from "os";
 import fs, { readFileSync } from "fs";
-import { BrowserWindow } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import { COMMON } from "./Enums.js";
 import Utils from "./Utils.js";
 import { exec } from "child_process";
@@ -38,6 +38,16 @@ export default class ResourceManager {
         } catch (error) {
             return Promise.reject((error as Error).message);
         }
+    }
+
+    public static async loadFilePath(): Promise<string | null> {
+        const { canceled, filePaths } = await dialog.showOpenDialog({
+            filters: [{ name: 'YAML files', extensions: ['yaml', 'yml'] }],
+            properties: ['openFile'],
+        });
+
+        if (canceled || filePaths.length === 0) return null;
+        return filePaths[0]; // full path
     }
 
     public static pollResources(mainWindow: BrowserWindow) {

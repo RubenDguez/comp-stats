@@ -10,6 +10,7 @@ import {
     TextField,
 } from "@mui/material";
 import useMain from "../hooks/useMain";
+import YamlFileInput from "../components/YamlFileInput";
 
 type TMainForm = Omit<ReturnType<typeof useMain>, "statics">;
 
@@ -22,18 +23,9 @@ const MainForm = ({ refs, actions, getters, setters }: TMainForm) => {
         >
             <Grid container spacing={3}>
                 <Grid size={12}>
-                    <TextField
-                        fullWidth
-                        size="small"
-                        label="Filename"
-                        type="text"
-                        name="filename"
-                        id="filename"
-                        value={getters.filePath}
-                        onChange={(e) => setters.setFilePath(e.target.value)}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
+                    <YamlFileInput
+                        setter={setters.setFilePath}
+                        getter={getters.filePath}
                     />
                 </Grid>
                 <Grid size={{ xs: 12, md: 6, xl: 4 }}>

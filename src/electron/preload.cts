@@ -20,6 +20,7 @@ electron.contextBridge.exposeInMainWorld('electron', {
     getStaticData: () => ipcInvoke('getStaticData'),
     exec: (command: string) => ipcInvoke('exec', command),
     loadFile: (path: string) => ipcInvoke('loadFile', path),
+    loadFilePath: () => ipcInvoke('loadFilePath')
 } satisfies Window['electron']);
 
 

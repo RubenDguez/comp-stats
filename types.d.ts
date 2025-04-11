@@ -15,6 +15,7 @@ type EventPayloadMapping = {
     getStaticData: StaticData;
     exec: string
     loadFile: IFileContent;
+    loadFilePath: string | null;
 }
 
 interface IJson {
@@ -40,5 +41,6 @@ interface Window {
         subscribeStaticstics: (callback: (statistics: Statistics) => void) => void;
         getStaticData: () => Promise<StaticData>;
         loadFile: (path: string) => Promise<IFileContent>;
+        loadFilePath: () => Promise<string | null>;
     }
 }
